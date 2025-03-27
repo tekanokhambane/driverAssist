@@ -65,7 +65,7 @@ class Driver(models.Model):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_driver(sender, instance, created, **kwargs):
-    if kwargs["created"]:
+    if kwargs["created"] and kwargs["instance"].role == "driver":
         Driver.objects.create(user=kwargs["instance"])
 
 
